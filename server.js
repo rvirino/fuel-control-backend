@@ -2,18 +2,19 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
+require('dotenv').config(); // Garante que as variáveis de ambiente sejam carregadas
 
 // --- Configuração do Servidor ---
 const app = express();
 const PORT = process.env.PORT || 3001; // A porta do servidor
 
 // --- Middlewares ---
-app.use(cors()); // Habilita o CORS para que o frontend possa aceder ao backend
+// Configuração de CORS mais robusta para aceitar requisições de qualquer origem
+app.use(cors()); 
 app.use(express.json()); // Habilita o parsing de JSON no corpo das requisições
 
 // --- Configuração do Banco de Dados PostgreSQL ---
-// Crie um ficheiro .env na raiz do projeto backend com a sua connection string
-// Exemplo: DATABASE_URL="postgresql://user:password@host:port/database"
+// A connection string será lida a partir das Environment Variables no Render
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -174,3 +175,4 @@ app.delete('/api/logs/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor a rodar na porta ${PORT}`);
 });
+
