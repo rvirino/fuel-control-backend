@@ -1,4 +1,4 @@
-// Importação dos módulos necessários
+// Importação dos módulos necessários.
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
@@ -175,4 +175,5 @@ app.delete('/api/logs/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor a rodar na porta ${PORT}`);
 });
+
 
